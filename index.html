@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Segui Voltey su Twitch</title>
+<title>VOLTEY_Y</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 *{
     margin:0;
     padding:0;
@@ -13,189 +15,283 @@
 }
 
 body{
-    min-height:100dvh;
-    font-family: Arial, sans-serif;
-    margin:0;
-    padding:0;
-    overflow:hidden;
+    font-family:'Press Start 2P', cursive;
     color:white;
-    background: linear-gradient(135deg, #9146FF, #2a0a5e);
+    background:#0d0d0d;
+    overflow:hidden;
+    height:100vh;
 }
 
-/* WRAPPER CENTRATO PERFETTO */
-.wrapper{
+/* BACKGROUND ANIMATO */
+.bg{
     position:fixed;
     inset:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    z-index:2;
+    background:linear-gradient(-45deg,#111,#1a1a1a,#0f0f0f,#1f1f1f);
+    background-size:400% 400%;
+    animation:gradient 10s ease infinite;
+    z-index:-2;
 }
 
-/* CARD */
-.container{
-    width:100%;
-    max-width:720px;
-    padding:40px 30px;
-    border-radius:18px;
+@keyframes gradient{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 
-    background: rgba(0,0,0,0.32);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-
-    border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: 0 25px 70px rgba(0,0,0,0.5);
+/* CENTRATURA */
+.wrapper{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     text-align:center;
+    width:min(90%,900px);
+    z-index:5;
 }
 
-/* titolo */
+/* TITOLO */
 h1{
-    font-size:clamp(2.5rem, 6vw, 4.5rem);
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    margin-bottom:15px;
-    text-shadow:0 0 25px rgba(145,70,255,0.8);
+    font-size:clamp(2rem,6vw,4rem);
+    color:#00ff88;
+    text-shadow:
+        0 0 10px #00ff88,
+        0 0 20px #00ff88,
+        0 0 40px #00ff88;
+    margin-bottom:25px;
 }
 
-/* testo */
-p{
-    font-size:1.2rem;
-    opacity:0.9;
-    margin-bottom:30px;
+/* TYPING */
+#typing{
+    font-size:12px;
+    color:#cccccc;
+    line-height:1.8;
+    margin-bottom:35px;
+    min-height:60px;
 }
 
-/* bottone */
-a.button{
+#typing::after{
+    content:"_";
+    animation:blink .8s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* BOTTONE */
+.button{
     display:inline-block;
-    padding:16px 34px;
-    background:#fff;
-    color:#9146FF;
+    padding:18px 38px;
+    font-size:14px;
+    color:white;
+    background:#9146FF;
     text-decoration:none;
-    border-radius:12px;
-    font-weight:bold;
-    font-size:1.1rem;
-    transition:0.25s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-radius:10px;
+    box-shadow:0 0 25px #9146FF;
+    transition:.3s;
+    margin-bottom:35px;
 }
 
-a.button:hover{
-    transform:translateY(-3px) scale(1.04);
+.button:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 50px #9146FF;
 }
 
-a.button:active{
-    transform:scale(0.97);
+/* PICCONI */
+.pickaxes{
+    margin:20px 0;
+}
+
+.pickaxe{
+    font-size:32px;
+    display:inline-block;
+    margin:0 10px;
+    animation:swing 1.5s infinite ease-in-out;
+}
+
+.pickaxe:nth-child(2){
+    animation-delay:.2s;
+}
+
+.pickaxe:nth-child(3){
+    animation-delay:.4s;
+}
+
+@keyframes swing{
+    0%,100%{
+        transform:rotate(-10deg) translateY(0);
+    }
+    50%{
+        transform:rotate(10deg) translateY(-8px);
+    }
+}
+
+/* BLOCCHI */
+.blocks{
+    margin-top:25px;
+}
+
+.block{
+    width:52px;
+    height:52px;
+    background:#3aa655;
+    display:inline-block;
+    margin:5px;
+    border:2px solid #000;
+    box-shadow:inset -4px -4px 0 rgba(0,0,0,.3);
+    animation:bounce 2s infinite;
+}
+
+.block:nth-child(2){animation-delay:.2s;}
+.block:nth-child(3){animation-delay:.4s;}
+.block:nth-child(4){animation-delay:.6s;}
+.block:nth-child(5){animation-delay:.8s;}
+
+.diamond{
+    background:#39c5ff;
+    box-shadow:
+        inset -4px -4px 0 rgba(0,0,0,.3),
+        0 0 20px #39c5ff;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
 }
 
 /* PARTICELLE */
-.shape{
-    position:fixed;
-    opacity:0.14;
-    animation: float linear infinite;
-    filter: drop-shadow(0 0 6px rgba(145,70,255,0.7));
+.pixel{
+    position:absolute;
+    width:8px;
+    height:8px;
+    animation:float linear infinite;
+    box-shadow:0 0 10px currentColor;
 }
 
-/* elementi gaming */
-.controller{
-    width:42px;
-    height:26px;
-    border:3px solid white;
-    border-radius:12px;
+.pixel.green{
+    background:#00ff88;
 }
-.headset{
-    width:34px;
-    height:28px;
-    border:3px solid white;
-    border-bottom:none;
-    border-radius:20px 20px 0 0;
+
+.pixel.blue{
+    background:#39c5ff;
 }
-.mouse{
-    width:20px;
-    height:30px;
-    border:3px solid white;
-    border-radius:12px;
-}
-.keyboard{
-    width:44px;
-    height:18px;
-    border:3px solid white;
-    border-radius:6px;
-}
-.arcade{
-    width:28px;
-    height:28px;
-    border:3px solid white;
-    border-radius:6px;
+
+.pixel.purple{
+    background:#9146FF;
 }
 
 @keyframes float{
-    0%{transform:translateY(110vh) rotate(0deg);}
-    100%{transform:translateY(-120px) rotate(360deg);}
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120vh);
+    }
 }
 
-/* posizioni particelle */
-.s1{left:5%;animation-duration:14s;}
-.s2{left:10%;animation-duration:11s;}
-.s3{left:15%;animation-duration:16s;}
-.s4{left:20%;animation-duration:12s;}
-.s5{left:25%;animation-duration:15s;}
-.s6{left:30%;animation-duration:13s;}
-.s7{left:35%;animation-duration:18s;}
-.s8{left:40%;animation-duration:10s;}
-.s9{left:45%;animation-duration:17s;}
-.s10{left:50%;animation-duration:12s;}
-.s11{left:55%;animation-duration:14s;}
-.s12{left:60%;animation-duration:11s;}
-.s13{left:65%;animation-duration:16s;}
-.s14{left:70%;animation-duration:13s;}
-.s15{left:75%;animation-duration:15s;}
-.s16{left:80%;animation-duration:12s;}
-.s17{left:85%;animation-duration:18s;}
-.s18{left:90%;animation-duration:14s;}
+/* MOBILE */
+@media(max-width:768px){
+
+    #typing{
+        font-size:10px;
+    }
+
+    .button{
+        font-size:12px;
+        padding:16px 24px;
+    }
+
+    .block{
+        width:40px;
+        height:40px;
+    }
+
+    .pickaxe{
+        font-size:26px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<!-- PARTICELLE -->
-<div class="shape controller s1"></div>
-<div class="shape headset s2"></div>
-<div class="shape mouse s3"></div>
-<div class="shape keyboard s4"></div>
-<div class="shape arcade s5"></div>
+<div class="bg"></div>
 
-<div class="shape controller s6"></div>
-<div class="shape headset s7"></div>
-<div class="shape mouse s8"></div>
-<div class="shape keyboard s9"></div>
-<div class="shape arcade s10"></div>
-
-<div class="shape controller s11"></div>
-<div class="shape headset s12"></div>
-<div class="shape mouse s13"></div>
-<div class="shape keyboard s14"></div>
-<div class="shape arcade s15"></div>
-
-<div class="shape controller s16"></div>
-<div class="shape headset s17"></div>
-<div class="shape mouse s18"></div>
-
-<!-- CENTRATO -->
 <div class="wrapper">
-    <div class="container">
-        <h1>SEGUI VOLTEY</h1>
 
-        <p>Live gaming, community e contenuti Twitch.</p>
+    <h1>VOLTEY_Y</h1>
 
-        <a class="button"
-           href="https://www.twitch.tv/voltey_y"
-           target="_blank"
-           rel="noopener noreferrer">
-            🎮 Vai al canale Twitch
-        </a>
+    <div id="typing"></div>
+
+    <a class="button"
+       href="https://www.twitch.tv/voltey_y"
+       target="_blank"
+       rel="noopener noreferrer">
+        WATCH ON TWITCH
+    </a>
+
+    <div class="pickaxes">
+        <div class="pickaxe">⛏</div>
+        <div class="pickaxe">⛏</div>
+        <div class="pickaxe">⛏</div>
     </div>
+
+    <div class="blocks">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block diamond"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+    </div>
+
 </div>
+
+<script>
+/* TESTO TYPING */
+const text =
+"Benvenuto nel mondo di VOLTEY_Y — segui lo stream e unisciti alla community!";
+
+let i = 0;
+
+function typing(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typing, 35);
+    }
+}
+
+typing();
+
+/* PARTICELLE */
+for(let i=0;i<80;i++){
+
+    const p = document.createElement("div");
+
+    const r = Math.random();
+
+    if(r > 0.7){
+        p.className = "pixel purple";
+    }else if(r > 0.4){
+        p.className = "pixel blue";
+    }else{
+        p.className = "pixel green";
+    }
+
+    p.style.left = Math.random()*100 + "vw";
+    p.style.animationDuration = (Math.random()*8+4) + "s";
+    p.style.animationDelay = -(Math.random()*10) + "s";
+    p.style.opacity = Math.random();
+
+    document.body.appendChild(p);
+}
+</script>
 
 </body>
 </html>
